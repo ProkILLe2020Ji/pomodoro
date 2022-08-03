@@ -23,11 +23,11 @@ public class Mine {
                     System.out.println(
                             "-b <time>: время отдыха, сколько хочешь отдыхать.\n");
                     System.out.println(
-                            "-count <count>: количество повторений.\n");
+                            "-count <number>: количество повторений.\n");
                     System.out.println(
-                            "-m <factor time>: увеличение времени работы с каждым повторомю.\n");
+                            "-m <number>: увеличение времени работы с каждым повторомю.\n");
                     System.out.println(
-                            "-t <time skip>: пропустить время работы таймера.\n");
+                            "-t : пропустить время работы таймера.\n");
                     System.out.println("Напишите пожалуйста команду.");
                     String[] ces = new Scanner(System.in).nextLine().split(" ");
                     for (i=0; i< ces.length; i++ ){
