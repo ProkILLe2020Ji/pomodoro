@@ -23,7 +23,7 @@ public class Mine {
         // кол-во подходов
         int count = 1;
         // длина рисунка progress bar
-        int sizePrint = 100;
+        int sizePrint = 60;
         int factor = 1;
 
         boolean isCallHelp = false;
@@ -38,23 +38,22 @@ public class Mine {
                 case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
                 case "-count" -> count = Integer.parseInt(cmd[++i]);
                 case "-t" -> isTest = true;
-                case "-a" -> add = true;
                 case "-m" -> factor = Integer.parseInt(cmd[++i]);
             }
         }
 
         if (!isCallHelp) {
             System.out.printf("Работаем %d min, " +
-                    "отдывахем %d min, кол-во подходов %d.\n", workMin, breakMin, count);
-            if (add == true){
-                System.out.println("Время работы будет увеличиваться в 2 раза с каждым подходом.");
+                    "отдыхаем %d min, кол-во подходов %d.\n", workMin, breakMin, count);
+            if (factor > 1){
+                System.out.printf("Время работы будет увеличиваться в " + factor +" раз(а) с каждым подходом.\n");
+            }else {
+                System.out.println("Время работы будет сохранено для каждого подхода.\n");
             }
             long startTime = System.currentTimeMillis();
             for (int i = 1; i <= count; i++) {
                 timer(workMin, breakMin, sizePrint);
-                if (add == true){
-                    workMin *= 2;
-                }
+                    workMin *= factor;
             }
             long endTime = System.currentTimeMillis();
             System.out.println("Pomodoro таймер истек: " + (endTime - startTime)/(1000 * 60) + " min");
