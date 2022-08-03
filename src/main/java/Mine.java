@@ -2,32 +2,17 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Mine {
-
     static boolean isTest = false;
     static boolean add = false;
-
-    /*
-    -w 1 -b 1 -count 1
-    split()
-    [-w, 1, -b, 1, -count, 1]
-     */
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Pomodoro. Напиши пожалуйста команду");
-        // считываем пользовательский ввод
+        System.out.println("Добро пожаловать в Pomodoro. Напишите пожалуйста команду ('-help' для помощи).");
         String[] cmd = new Scanner(System.in).nextLine().split(" ");
-
-        // время работы
         int workMin = 1;
-        // время отдыха
         int breakMin = 1;
-        // кол-во подходов
         int count = 1;
-        // длина рисунка progress bar
         int sizePrint = 60;
         int factor = 1;
-
         boolean isCallHelp = false;
-
         for (int i=0; i < cmd.length; i++) {
             switch (cmd[i]) {
                 case "-help" -> {
@@ -41,10 +26,8 @@ public class Mine {
                 case "-m" -> factor = Integer.parseInt(cmd[++i]);
             }
         }
-
         if (!isCallHelp) {
-            System.out.printf("Работаем %d min, " +
-                    "отдыхаем %d min, кол-во подходов %d.\n", workMin, breakMin, count);
+            System.out.printf("Работаем %d min, " + "отдыхаем %d min, кол-во подходов %d.\n", workMin, breakMin, count);
             if (factor > 1){
                 System.out.printf("Время работы будет увеличиваться в " + factor +" раз(а) с каждым подходом.\n");
             }else {
@@ -56,7 +39,7 @@ public class Mine {
                     workMin *= factor;
             }
             long endTime = System.currentTimeMillis();
-            System.out.println("Pomodoro таймер истек: " + (endTime - startTime)/(1000 * 60) + " min");
+            System.out.println("Pomodoro таймер истек. Время работы: " + (endTime - startTime)/(1000 * 60) + " минут.");
             for (int i=0; i < cmd.length; i++) {
                 switch (cmd[i]) {
                     case "-help" -> {
@@ -72,13 +55,11 @@ public class Mine {
             }
         }
     }
-
     private static void timer(int workTime, int breakTime, int sizeProgressBar) throws InterruptedException {
         printProgress("Время работать: ", workTime, sizeProgressBar);
 
         printProgress("Время отдыхать: ", breakTime, sizeProgressBar);
     }
-
     private static void printProgress(String process, int time, int size) throws InterruptedException {
         int length;
         int rep;
@@ -106,17 +87,20 @@ public class Mine {
         }
         System.out.println();
     }
-
     private static void printHelpMsg() {
         System.out.println(
-                "\n\nPomodoro - сделай свое время более эффективным\n");
+                "\n\nPomodoro - сделай свое время более эффективным.\n");
         System.out.println(
-                "	-w <time>: время работы, сколько хочешь работать.\n");
+                "-w <time>: время работы, сколько хочешь работать.\n");
         System.out.println(
-                "	-b <time>: время отдыха, сколько хочешь отдыхать.\n");
+                "-b <time>: время отдыха, сколько хочешь отдыхать.\n");
         System.out.println(
-                "	-count <count>: количество повторений.\n");
+                "-count <count>: количество повторений.\n");
         System.out.println(
-                "   -a <add time>: увеличение времени работы в 2 раза с каждым повторомю\n");
+                "-m <factor time>: увеличение времени работы с каждым повторомю.\n");
+        System.out.println(
+                "-t <time skip>: пропустить время работы таймера.\n");
+        System.out.println("Напишите пожалуйста команду.");
+        String[] cmd = new Scanner(System.in).nextLine().split(" ");
     }
 }
