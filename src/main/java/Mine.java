@@ -21,9 +21,10 @@ public class Mine {
         // время отдыха
         int breakMin = 5;
         // кол-во подходов
-        int coun = 1;
+        int count = 1;
         // длина рисунка progress bar
-        int sizePrint = 30;
+        int sizePrint = 100;
+        int factor = 1;
 
         boolean isCallHelp = false;
 
@@ -35,22 +36,23 @@ public class Mine {
                 }
                 case "-w" -> workMin = Integer.parseInt(cmd[++i]);
                 case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
-                case "-coun" -> coun = Integer.parseInt(cmd[++i]);
+                case "-count" -> count = Integer.parseInt(cmd[++i]);
                 case "-t" -> isTest = true;
                 case "-a" -> add = true;
+                case "-m" -> factor = Integer.parseInt(cmd[++i]);
             }
         }
 
         if (!isCallHelp) {
             System.out.printf("Работаем %d min, " +
-                    "отдывахем %d min, кол-во подходов %d.\n", workMin, breakMin, coun);
-            if (add = true){
+                    "отдывахем %d min, кол-во подходов %d.\n", workMin, breakMin, count);
+            if (add == true){
                 System.out.println("Время работы будет увеличиваться в 2 раза с каждым подходом.");
             }
             long startTime = System.currentTimeMillis();
-            for (int i = 1; i <= coun; i++) {
+            for (int i = 1; i <= count; i++) {
                 timer(workMin, breakMin, sizePrint);
-                if ( add= true){
+                if (add == true){
                     workMin *= 2;
                 }
             }
@@ -64,7 +66,7 @@ public class Mine {
                     }
                     case "-w" -> workMin = Integer.parseInt(cmd[++i]);
                     case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
-                    case "-count" -> coun = Integer.parseInt(cmd[++i]);
+                    case "-count" -> count = Integer.parseInt(cmd[++i]);
                     case "-t" -> isTest = true;
                     case "-a" -> add = true;
                 }
