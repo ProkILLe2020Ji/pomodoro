@@ -16,8 +16,29 @@ public class Mine {
         for (int i=0; i < cmd.length; i++) {
             switch (cmd[i]) {
                 case "-help" -> {
-                    printHelpMsg();
-                    isCallHelp = true;
+                    System.out.println(
+                            "\n\nPomodoro - сделай свое время более эффективным.\n");
+                    System.out.println(
+                            "-w <time>: время работы, сколько хочешь работать.\n");
+                    System.out.println(
+                            "-b <time>: время отдыха, сколько хочешь отдыхать.\n");
+                    System.out.println(
+                            "-count <count>: количество повторений.\n");
+                    System.out.println(
+                            "-m <factor time>: увеличение времени работы с каждым повторомю.\n");
+                    System.out.println(
+                            "-t <time skip>: пропустить время работы таймера.\n");
+                    System.out.println("Напишите пожалуйста команду.");
+                    String[] ces = new Scanner(System.in).nextLine().split(" ");
+                    for (i=0; i< ces.length; i++ ){
+                        switch (ces[i]){
+                            case "-w" -> workMin = Integer.parseInt(ces[++i]);
+                            case "-b" -> breakMin = Integer.parseInt(ces[++i]);
+                            case "-count" -> count = Integer.parseInt(ces[++i]);
+                            case "-t" -> isTest = true;
+                            case "-m" -> factor = Integer.parseInt(ces[++i]);
+                        }
+                    }
                 }
                 case "-w" -> workMin = Integer.parseInt(cmd[++i]);
                 case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
@@ -40,19 +61,6 @@ public class Mine {
             }
             long endTime = System.currentTimeMillis();
             System.out.println("Pomodoro таймер истек. Время работы: " + (endTime - startTime)/(1000 * 60) + " минут.");
-            for (int i=0; i < cmd.length; i++) {
-                switch (cmd[i]) {
-                    case "-help" -> {
-                        printHelpMsg();
-                        isCallHelp = true;
-                    }
-                    case "-w" -> workMin = Integer.parseInt(cmd[++i]);
-                    case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
-                    case "-count" -> count = Integer.parseInt(cmd[++i]);
-                    case "-t" -> isTest = true;
-                    case "-a" -> add = true;
-                }
-            }
         }
     }
     private static void timer(int workTime, int breakTime, int sizeProgressBar) throws InterruptedException {
@@ -86,21 +94,5 @@ public class Mine {
             }
         }
         System.out.println();
-    }
-    private static void printHelpMsg() {
-        System.out.println(
-                "\n\nPomodoro - сделай свое время более эффективным.\n");
-        System.out.println(
-                "-w <time>: время работы, сколько хочешь работать.\n");
-        System.out.println(
-                "-b <time>: время отдыха, сколько хочешь отдыхать.\n");
-        System.out.println(
-                "-count <count>: количество повторений.\n");
-        System.out.println(
-                "-m <factor time>: увеличение времени работы с каждым повторомю.\n");
-        System.out.println(
-                "-t <time skip>: пропустить время работы таймера.\n");
-        System.out.println("Напишите пожалуйста команду.");
-        String[] cmd = new Scanner(System.in).nextLine().split(" ");
     }
 }
