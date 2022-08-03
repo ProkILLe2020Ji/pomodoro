@@ -17,9 +17,9 @@ public class Mine {
         String[] cmd = new Scanner(System.in).nextLine().split(" ");
 
         // время работы
-        int workMin = 25;
+        int workMin = 1;
         // время отдыха
-        int breakMin = 5;
+        int breakMin = 1;
         // кол-во подходов
         int count = 1;
         // длина рисунка progress bar
